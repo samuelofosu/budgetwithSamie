@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget With Samie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f7b733;
+            --secondary-color: #2c3e50;
+            --accent-color: #9b59b6;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #e67e22;
+            --danger-color: #e74c3c;
+            --african-pattern: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path fill="%239b59b6" d="M0 0h20v20H0z"/><path fill="%23f7b733" d="M20 20h20v20H20z"/></svg>');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--african-pattern);
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1348&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .card-1 .card-header {
+            background-color: var(--primary-color);
+        }
+
+        .card-2 .card-header {
+            background-color: var(--accent-color);
+        }
+
+        .card-3 .card-header {
+            background-color: var(--success-color);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .budget-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .budget-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .budget-item h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s;
+        }
+
+        .needs .progress {
+            background-color: var(--success-color);
+        }
+
+        .wants .progress {
+            background-color: var(--warning-color);
+        }
+
+        .savings .progress {
+            background-color: var(--accent-color);
+        }
+
+        .budget-tracker {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tracker-body table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tracker-body th, .tracker-body td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tracker-body th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .tracker-body tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .badge-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .newsletter {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: modalOpen 0.5s;
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            flex-direction: column;
+        }
+
+        .celebration-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .celebration h2 {
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .newsletter-form input {
+                border-radius: 30px;
+            }
+
+            .newsletter-form button {
+                border-radius: 30px;
+                width: 100%;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-coins"></i> Bugdet With Samie
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#importance">Importance</a></li>
+                    <li><a href="#plans">Budget Plans</a></li>
+                    <li><a href="#tracker">Tracker</a></li>
+                    <li><a href="#rule">50-30-20</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Master Your Money with African Wisdom</h1>
+            <p>Discover the power of budgeting and take control of your financial future using time-tested African financial principles.</p>
+            <a href="#plans" class="btn btn-primary">Start Budgeting Today</a>
+        </div>
+    </section>
+
+    <section id="importance" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Importance of Budgeting</h2>
+            </div>
+            <div class="card-container">
+                <div class="card card-1">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Financial Protection</h3>
+                        <p>Just like the Baobab tree provides shelter, a budget protects you from financial storms. It helps you prepare for unexpected expenses and emergencies.</p>
+                    </div>
+                </div>
+                <div class="card card-2">
+                    <div class="card-header">
+                        <i class="fas fa-bullseye fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Goal Achievement</h3>
+                        <p>In African tradition, we plan our harvest. Similarly, budgeting helps you plan and achieve your financial goals, whether it's education, home, or retirement.</p>
+                    </div>
+                </div>
+                <div class="card card-3">
+                    <div class="card-header">
+                        <i class="fas fa-university fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <h3>Wealth Building</h3>
+                        <p>The tortoise moves slowly but steadily. Budgeting helps you build wealth over time through consistent savings and smart spending habits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Create Your Budget Plan</h2>
+            </div>
+            <div class="budget-form">
+                <form id="budgetForm">
+                    <div class="form-group">
+                        <label for="monthlyIncome">Monthly Income (₵)</label>
+                        <input type="number" id="monthlyIncome" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="needs">Needs (50%) - Rent, Food, Utilities (₵)</label>
+                        <input type="number" id="needs" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="wants">Wants (30%) - Entertainment, Dining Out (₵)</label>
+                        <input type="number" id="wants" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="savings">Savings/Debt (20%) - Savings, Investments, Debt (₵)</label>
+                        <input type="number" id="savings" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn">Create Budget</button>
+                </form>
+            </div>
+            <div class="budget-grid" id="budgetDisplay" style="display: none;">
+                <div class="budget-item needs">
+                    <h3>Needs <span id="needsPercent">50%</span></h3>
+                    <p>₵<span id="needsAmount">0</span> of ₵<span id="needsBudget">0</span> budgeted</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="needsProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="budget-item wants">
+                    <h3>Wants <span id="wantsPercent">30%</span></h3>
+                    <p>₵<span id="wantsAmount">0</span> of ₵<span id="wantsBudget">0</span> budgeted</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="wantsProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="budget-item savings">
+                    <h3>Savings/Debt <span id="savingsPercent">20%</span></h3>
+                    <p>₵<span id="savingsAmount">0</span> of ₵<span id="savingsBudget">0</span> budgeted</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="savingsProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tracker" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Budget Tracker</h2>
+            </div>
+            <div class="budget-tracker">
+                <div class="tracker-header">
+                    <h3>Your Monthly Expenses</h3>
+                    <button class="btn" id="addExpenseBtn">Add Expense</button>
+                </div>
+                <div class="tracker-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expensesTable">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rule" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>The 50-30-20 Rule</h2>
+            </div>
+            <div class="card-container">
+                <div class="card card-1">
+                    <div class="card-header">
+                        <h3>50% - Needs</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Inspired by African communal living, allocate 50% of your income to essential needs that sustain your household:</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Housing (Rent/Mortgage)</li>
+                            <li>Utilities (Electricity, Water)</li>
+                            <li>Groceries (Food supplies)</li>
+                            <li>Basic Transportation</li>
+                            <li>Minimum Loan Payments</li>
+                            <li>Insurance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card card-2">
+                    <div class="card-header">
+                        <h3>30% - Wants</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Like the African philosophy of enjoying life's pleasures, allocate 30% to things that enhance your lifestyle:</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Dining out</li>
+                            <li>Entertainment</li>
+                            <li>Hobbies</li>
+                            <li>Vacations</li>
+                            <li>New gadgets</li>
+                            <li>Streaming services</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card card-3">
+                    <div class="card-header">
+                        <h3>20% - Savings/Debt</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Following the African tradition of preparing for the future, allocate 20% to savings and debt repayment:</p>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Emergency fund</li>
+                            <li>Retirement savings</li>
+                            <li>Investments</li>
+                            <li>Education fund</li>
+                            <li>Extra debt payments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Get Weekly Budgeting Tips</h2>
+            <p>Join our community and receive African-inspired financial wisdom straight to your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="text" id="userName" placeholder="Your Name" required>
+                <input type="email" id="userEmail" placeholder="Your Email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <h3>Budget With Samie</h3>
+            <p>Empowering Financial Freedom Through Traditional Wisdom</p>
+            <!-- <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div> -->
+            <p>&copy; Budget With Samie. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Add Expense Modal -->
+    <div class="modal" id="expenseModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add New Expense</h2>
+            <form id="expenseForm">
+                <div class="form-group">
+                    <label for="expenseDate">Date</label>
+                    <input type="date" id="expenseDate" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseCategory">Category</label>
+                    <select id="expenseCategory" class="form-control" required>
+                        <option value="">Select Category</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Food">Food</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Education">Education</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="expenseDescription">Description</label>
+                    <input type="text" id="expenseDescription" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseAmount">Amount (₵)</label>
+                    <input type="number" id="expenseAmount" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">Add Expense</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div class="celebration" id="celebrationModal">
+        <div class="celebration-content">
+            <h2 class="animate__animated animate__bounceIn">Congratulations!</h2>
+            <p class="animate__animated animate__fadeIn">You've successfully met your budget goals this month!</p>
+            <p class="animate__animated animate__fadeIn">Keep up the great work!</p>
+            <button class="btn" id="closeCelebration">Close</button>
+        </div>
+    </div>
+
+    <!-- Subscription Success Modal -->
+    <div class="modal" id="subscriptionModal">
+        <div class="modal-content">
+            <span class="close-subscription-modal">&times;</span>
+            <h2>Thank You for Subscribing!</h2>
+            <p id="welcomeMessage"></p>
+            <p>You'll receive our first budgeting tip within 24 hours.</p>
+            <button class="btn" id="closeSubscriptionModal">Got it!</button>
+        </div>
+    </div>
+
+    <script>
+        // Budget Form
+        document.getElementById('budgetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const income = parseFloat(document.getElementById('monthlyIncome').value);
+            const needs = parseFloat(document.getElementById('needs').value);
+            const wants = parseFloat(document.getElementById('wants').value);
+            const savings = parseFloat(document.getElementById('savings').value);
+            
+            const needsPercent = (needs / income) * 100;
+            const wantsPercent = (wants / income) * 100;
+            const savingsPercent = (savings / income) * 100;
+            
+            document.getElementById('needsBudget').textContent = needs.toLocaleString();
+            document.getElementById('wantsBudget').textContent = wants.toLocaleString();
+            document.getElementById('savingsBudget').textContent = savings.toLocaleString();
+            
+            document.getElementById('needsPercent').textContent = needsPercent.toFixed(0) + '%';
+            document.getElementById('wantsPercent').textContent = wantsPercent.toFixed(0) + '%';
+            document.getElementById('savingsPercent').textContent = savingsPercent.toFixed(0) + '%';
+            
+            document.getElementById('budgetDisplay').style.display = 'grid';
+            
+            // If they followed the 50-30-20 rule closely
+            if (
+                (needsPercent >= 45 && needsPercent <= 55) && 
+                (wantsPercent >= 25 && wantsPercent <= 35) && 
+                (savingsPercent >= 15 && savingsPercent <= 25)
+            ) {
+                triggerCelebration();
+            }
+        });
+
+        // Expense Tracker
+        const expenses = [];
+        
+        // Modal Handling
+        const expenseModal = document.getElementById('expenseModal');
+        const addExpenseBtn = document.getElementById('addExpenseBtn');
+        const closeModal = document.querySelector('.close-modal');
+        
+        addExpenseBtn.addEventListener('click', () => {
+            expenseModal.style.display = 'flex';
+            document.getElementById('expenseDate').valueAsDate = new Date();
+        });
+        
+        closeModal.addEventListener('click', () => {
+            expenseModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === expenseModal) {
+                expenseModal.style.display = 'none';
+            }
+        });
+        
+        // Expense Form
+        document.getElementById('expenseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const expense = {
+                date: document.getElementById('expenseDate').value,
+                category: document.getElementById('expenseCategory').value,
+                description: document.getElementById('expenseDescription').value,
+                amount: parseFloat(document.getElementById('expenseAmount').value)
+            };
+            
+            expenses.push(expense);
+            updateExpensesTable();
+            
+            // Reset form and close modal
+            this.reset();
+            expenseModal.style.display = 'none';
+        });
+        
+        function updateExpensesTable() {
+            const tableBody = document.getElementById('expensesTable');
+            tableBody.innerHTML = '';
+            
+            expenses.forEach(expense => {
+                const row = document.createElement('tr');
+                
+                const dateCell = document.createElement('td');
+                dateCell.textContent = new Date(expense.date).toLocaleDateString();
+                
+                const categoryCell = document.createElement('td');
+                categoryCell.textContent = expense.category;
+                
+                const descCell = document.createElement('td');
+                descCell.textContent = expense.description;
+                
+                const amountCell = document.createElement('td');
+                amountCell.textContent = '₵' + expense.amount.toLocaleString();
+                
+                const statusCell = document.createElement('td');
+                const status = getStatus(expense.category, expense.amount);
+                const badge = document.createElement('span');
+                badge.className = `badge badge-${status.class}`;
+                badge.textContent = status.text;
+                statusCell.appendChild(badge);
+                
+                row.appendChild(dateCell);
+                row.appendChild(categoryCell);
+                row.appendChild(descCell);
+                row.appendChild(amountCell);
+                row.appendChild(statusCell);
+                
+                tableBody.appendChild(row);
+            });
+            
+            // After adding 5 expenses (simulating meeting marketing demands)
+            if (expenses.length >= 5) {
+                triggerCelebration();
+            }
+        }
+        
+        function getStatus(category, amount) {
+            if (category === 'Food' && amount > 10000) {
+                return { class: 'danger', text: 'Overspent' };
+            } else if (category === 'Entertainment' && amount > 5000) {
+                return { class: 'danger', text: 'Overspent' };
+            } else if (amount > 10000) {
+                return { class: 'warning', text: 'High' };
+            } else {
+                return { class: 'success', text: 'Good' };
+            }
+        }
+
+        // Newsletter Subscription
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            
+            document.getElementById('welcomeMessage').textContent = `Welcome, ${name}! We're excited to share our African-inspired budgeting wisdom with you at ${email}.`;
+            document.getElementById('subscriptionModal').style.display = 'flex';
+            
+            this.reset();
+            
+            // Create confetti-like celebration
+            createConfetti();
+        });
+        
+        // Close Subscription Modal
+        document.querySelector('.close-subscription-modal').addEventListener('click', () => {
+            document.getElementById('subscriptionModal').style.display = 'none';
+        });
+        
+        document.getElementById('closeSubscriptionModal').addEventListener('click', () => {
+            document.getElementById('subscriptionModal').style.display = 'none';
+        });
+
+        // Celebration Function
+        function triggerCelebration() {
+            const celebrationModal = document.getElementById('celebrationModal');
+            celebrationModal.style.display = 'flex';
+            
+            // Create confetti
+            createConfetti();
+        }
+        
+        document.getElementById('closeCelebration').addEventListener('click', () => {
+            document.getElementById('celebrationModal').style.display = 'none';
+        });
+
+        // Confetti Effect
+        function createConfetti() {
+            const colors = ['#f7b733', '#9b59b6', '#27ae60', '#e67e22', '#e74c3c'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = Math.random() * 3 + 1 + 's';
+                confetti.style.opacity = Math.random();
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                
+                document.body.appendChild(confetti);
+                
+                // Animation
+                const animation = confetti.animate([
+                    { top: '-10px', opacity: 1 },
+                    { top: '100vh', opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.1, 0.2, 0.3, 1)'
+                });
+                
+                animation.onfinish = () => {
+                    confetti.remove();
+                };
+            }
+        }
+    </script>
+</body>
+</html>
